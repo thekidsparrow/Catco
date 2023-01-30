@@ -19,18 +19,18 @@ async function createTables() {
 	try {
 		const createTablesQuery = `
 			CREATE TABLE users (
-			id SERIAL PRIMARY KEY,
-			email VARCHAR(255) UNIQUE NOT NULL,
-			password VARCHAR(255) NOT NULL,
-			'isAdmin' BOOLEAN DEFAULT false
+				id SERIAL PRIMARY KEY,
+				email VARCHAR(255) UNIQUE NOT NULL,
+				password VARCHAR(255) NOT NULL,
+				"isAdmin" BOOLEAN DEFAULT false
 			);
 
 			CREATE TABLE products (
-			id SERIAL PRIMARY KEY,
-			name VARCHAR(255) UNIQUE NOT NULL,
-			description VARCHAR(255) NOT NULL,
-			price NUMERIC NOT NULL,
-			stock INTEGER
+				id SERIAL PRIMARY KEY,
+				name VARCHAR(255) UNIQUE NOT NULL,
+				description VARCHAR(255) NOT NULL,
+				price NUMERIC NOT NULL,
+				stock INTEGER
 			);
 
 			CREATE TABLE userProducts (
@@ -43,21 +43,21 @@ async function createTables() {
 		await client.query(createTablesQuery);
 
 	} catch (error) {
-		console.error('Error creating tables', error);
+		console.error('Error creating tables');
 		throw error;
 	}
 }
 
 async function createUsers() {
 	try {
-		const usersToCreate = [
+		const users = [
 			{ email: 'albert@gmail.com', password: 'bertie99' },
 			{ email: 'sandra@gmail.com', password: 'sandra123' },
 			{ email: 'glamgal@gmail.com', password: 'glamgal123' },
 			{ email: 'admin@catco.com', password: 'admin123', isAdmin: true }
 		];
 
-		await Promise.all(usersToCreate.map(createUser));
+		await Promise.all(users.map(createUser));
 	} catch (error) {
 		console.error('Error creating users');
 		throw error;
@@ -66,7 +66,7 @@ async function createUsers() {
 
 async function createProducts() {
 	try {
-		const productsToCreate = [
+		const products = [
 			{
 				name: 'Kitten Mittens',
 				description: 'The perfect mittens for anyone who has a cold kitten.',
@@ -99,7 +99,7 @@ async function createProducts() {
 			},
 		];
 
-		await Promise.all(productsToCreate.map(createProduct));
+		await Promise.all(products.map(createProduct));
 	} catch (error) {
 		console.log('Error creating products');
 		throw error;

@@ -26,8 +26,8 @@ export function CatcoProvider({ children }) {
 
     const value = {
         currentUser: state.currentUser,
-        setCurrentUser,
         products: state.products,
+        setCurrentUser,
         setProducts
     };
 

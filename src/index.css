@@ -1,13 +1,114 @@
 body {
+  font: 1em Arial, sans-serif;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-image: linear-gradient(79deg, #fcfced, #8d3a8d 48%, #ebf6ff);
+}
+
+.navbar-container {
+  align-items: center;
+  background-color: #EAEAEA;
+  border-bottom: 1px solid #CCCCCC;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.navbar-items {
+  display: flex; 
+}
+
+.auth-form-container,
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+@media screen and (mid-width: 600px) {}
+
+.auth-form-container {
+  padding: 5rem;
+  border: 1px;
+  color: white;
+  border-radius: 10px;
+}
+
+label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+input {
+  margin: 0.5rem 0;
+  padding: none;
+  border-radius: 10px;
+}
+
+button {
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  color: black;
+}
+
+.link-btn {
+  background-color: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Content */
+.content {
+  margin: 1em;
+}
+
+
+/* Products */
+.products-container {
+  gap: 1em;
+  display: flex;
+}
+
+.product {
+  background: #b0c3c5;
+  border: 1px solid #475758;
+  border-radius: 5px;
+  padding: 1em;
+}
+
+.product img {
+  border: 1px solid #475758;
+  border-radius: 5px;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.product a.title {
+  color: #000000;
+  display: block;
+  font-size: 1.4em;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.product a.title:hover {
+  font-weight: bold;
+}
+
+.product .price {
+  font-size: 1.6em;
+  margin-bottom: 5px;
 }
