@@ -1,15 +1,17 @@
-const client = require("../client");
+const client = require("../client").default;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 async function getAllUsers() {
   try {
-    const query = 'SELECT * FROM users';
-    const { rows: [users] } = await client.query(query)
+    const query = "SELECT * FROM users";
+    const {
+      rows: [users],
+    } = await client.query(query);
 
     return users;
   } catch (error) {
-    console.error('Error getting all users')
+    console.error("Error getting all users");
     throw error;
   }
 }
@@ -20,27 +22,27 @@ async function getUser({ email, password }) {
   }
 
   try {
-    const user = await getUserByEmail(email)
+    const user = await getUserByEmail(email);
     const hashedPassword = user.password;
     let matchedPassword = await bcrypt.compare(password, hashedPassword);
 
     if (matchedPassword) {
       delete user.password;
       return user;
-    }
-    else {
+    } else {
       return;
     }
-
   } catch (error) {
-    console.error("Error getting user")
+    console.error("Error getting user");
   }
 }
 
 async function getUserByEmail(email) {
   try {
     const query = `SELECT * FROM users WHERE email = '${email}'`;
-    const { rows: [user] } = await client.query(query);
+    const {
+      rows: [user],
+    } = await client.query(query);
 
     return user;
   } catch (error) {
@@ -50,7 +52,9 @@ async function getUserByEmail(email) {
 
 async function getUserById(userId) {
   try {
-    const { rows: [user] } = await client.query(`
+    const {
+      rows: [user],
+    } = await client.query(`
     SELECT *
     FROM users
     WHERE id =  ${userId}
@@ -66,7 +70,6 @@ async function getUserById(userId) {
     throw error;
   }
 }
-
 
 async function createUser({ email, password, isAdmin }) {
   try {
@@ -86,18 +89,19 @@ async function createUser({ email, password, isAdmin }) {
       VALUES('${email}', '${hashedPassword}', '${isAdmin}')
       ON CONFLICT (email) DO NOTHING
       RETURNING *`;
-    }
-    else {
+    } else {
       // 'isAdmin' is not defined
       // Populate 'query' with a query excluding the 'isAdmin' property
       query = `INSERT INTO users (email, password)
       VALUES('${email}', '${hashedPassword}')
       ON CONFLICT (email) DO NOTHING
-      RETURNING *`
+      RETURNING *`;
     }
 
     // Run the query against our DB
-    const { rows: [user] } = await client.query(query);
+    const {
+      rows: [user],
+    } = await client.query(query);
 
     // Remove the password before returning the user
     delete user.password;
@@ -105,7 +109,7 @@ async function createUser({ email, password, isAdmin }) {
     // Return the user
     return user;
   } catch (error) {
-    console.error("ERROR CREATING USER!!!!!")
+    console.error("Error creating user", email, error);
   }
 }
 module.exports = {
@@ -115,5 +119,5 @@ module.exports = {
   getUser,
   createUser,
   getAllUsers,
-  getUserById
+  getUserById,
 };

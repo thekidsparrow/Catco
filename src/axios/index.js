@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function login(email, password) {
-  const { data: user } = await axios.post('/api/users/login', {
+  const { data: user } = await axios.post("/api/users/login", {
     email: email,
-    password: password
+    password: password,
   });
 
   return user;
 }
 
 export async function register(email, password) {
-  const { data: user } = await axios.post('/api/users/register', {
+  const { data: user } = await axios.post("/api/users/register", {
     email: email,
-    password: password
+    password: password,
   });
 
   return user;
@@ -20,8 +20,8 @@ export async function register(email, password) {
 
 export async function getUser(token) {
   // Headers are added as a second parameter to axios.get()
-  const { data: user } = await axios.get('/api/users/me', {
-    headers: { Authorization: `Bearer ${token}` }
+  const { data: user } = await axios.get("/api/users/me", {
+    headers: { Authorization: `Bearer ${token}` },
   });
 
   return user;
@@ -29,17 +29,17 @@ export async function getUser(token) {
 
 export async function getAllUsers() {
   try {
-    const { data: users } = await axios.get('/api/users/getAll');
+    const { data: users } = await axios.get("/api/users/getAll");
 
     return users;
   } catch (error) {
-    console.log('Error fetching all users');
+    console.log("Error fetching all users");
   }
 }
 
 export async function getAPIHealth() {
   try {
-    const { data } = await axios.get('/api/health');
+    const { data } = await axios.get("/api/health");
     return data;
   } catch (err) {
     console.error(err);
@@ -49,7 +49,7 @@ export async function getAPIHealth() {
 
 export async function getProducts() {
   try {
-    const { data: products } = await axios.get('/api/products');
+    const { data: products } = await axios.get("/api/products");
 
     return products;
   } catch (error) {
