@@ -1,4 +1,4 @@
-const client = require('./client');
+const client = require('./client').default;
 const models = require('./models');
 
 module.exports = {
